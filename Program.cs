@@ -1,5 +1,6 @@
 ﻿using System;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace Working_with_blobs
 {
@@ -18,9 +19,15 @@ namespace Working_with_blobs
 
             // getting container name
             BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(_container_name);
-            BlobClient blobClient = blobContainerClient.GetBlobClient(_blog_name);
-            blobClient.Upload(_blog_location);
-            Console.WriteLine("Blob has been uploaded");
+            // BlobClient blobClient = blobContainerClient.GetBlobClient(_blog_name);
+            // blobClient.Upload(_blog_location);
+            // Console.WriteLine("Blob has been uploaded");
+
+            // listing blobs 
+            foreach (BlobItem item in blobContainerClient.GetBlobs())
+            {
+                Console.WriteLine(item.Name);
+            }
 
             Console.ReadKey();
         }
